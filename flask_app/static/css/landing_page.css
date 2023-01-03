@@ -1,0 +1,10 @@
+/* blueish primary color, orangish secondary color, maybe gray on forms */
+
+.container {
+    display: flex;
+}
+
+.container .landingpage_info {
+    display: flex;
+    flex-direction: column;
+}
