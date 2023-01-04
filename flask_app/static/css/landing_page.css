@@ -110,21 +110,73 @@ body {
     padding: 1rem 2rem;
     border-radius: 12px;
     box-shadow: 1px 4px 4px rgba(0,0,0,0.5);
-    height: 50%;
+    width: 50%;
 }
 
 .signup h2 {
-    font-size: 200%;
+    font-size: 220%;
     font-weight: bold;
     text-align: center;
     margin: 1rem;
+    color: rgb(30, 30, 30);
+}
+
+.signup form {
+    text-align: center;
+}
+
+.signup label {
+    display: block;
+    text-align: left;
+    margin-left: 9.5%;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+.signup input {
+    display: inline-block;
+    line-height: 2;
+    width: 80%;
+    border-radius: 4px;
+    border: none;
+}
+
+.label-input-group {
+    margin: 1rem 0;
+}
+
+.signup-login {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-login button {
+    width: 6rem;
+    margin-left: 9.25%;
+    padding: 3%;
+    border-radius: 6px;
+    border: 2px solid rgb(30, 30, 30);
+    color:rgb(30, 30, 30);
+    background-color: rgb(223, 223, 223);
+    cursor: pointer;
+}
+
+.already-account {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.already-account p {
+    display: inline;
+    font-weight: bold;
 }
 
 footer {
     height: 1rem;
     position: fixed;
     bottom: 1rem;
-    color: rgb(95,151,198);
+    color: rgb(90, 144, 188);
     width: 100%;
     margin: 0 0 0 1rem;
 }
+
