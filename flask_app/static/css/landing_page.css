@@ -100,8 +100,25 @@ body {
     flex: 1;
     min-width: 35%;
     max-width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.signup {
+    background-color: rgba(95, 152, 198, 0.6);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 1px 4px 4px rgba(0,0,0,0.5);
+    height: 50%;
+}
+
+.signup h2 {
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem;
+}
 
 footer {
     height: 1rem;
