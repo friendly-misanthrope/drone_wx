@@ -8,6 +8,7 @@ mydb = "drone_wx"
 
 class Pilot:
     def __init__(self, data):
+        self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -24,7 +25,7 @@ class Pilot:
         (first_name, last_name, email, password)
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);
         '''
-        return connectToMySQL(mydb).query_db(query)
+        return connectToMySQL(mydb).query_db(query, data)
 
     @classmethod
     def get_by_id(cls, data):
@@ -32,7 +33,7 @@ class Pilot:
         SELECT * FROM pilots
         WHERE id = %(id)s;
         '''
-        results = connectToMySQL(mydb).query_db(query)
+        results = connectToMySQL(mydb).query_db(query, data)
         return cls(results[0])
 
     @classmethod
@@ -41,7 +42,7 @@ class Pilot:
         SELECT * FROM pilots
         WHERE email = %(email)s;
         '''
-        results = connectToMySQL(mydb).query_db(query)
+        results = connectToMySQL(mydb).query_db(query, data)
         if len(results) < 1:
             return False
         return cls(results[0])
@@ -70,7 +71,7 @@ class Pilot:
         is_certified = %(is_certified)s
         WHERE id = %(id)s;
         '''
-        return connectToMySQL(mydb).query_db(query)
+        return connectToMySQL(mydb).query_db(query, data)
 
     @classmethod
     def get_pilot_with_drones(cls, data):
@@ -94,15 +95,15 @@ class Pilot:
 
         # check last name
         if len(pilot['last_name']) < 1:
-            flash('last name is required')
+            flash('Last name is required')
             is_valid = False
         elif len(pilot['last_name']) < 3:
-            flash('last name must be longer than 2 characters')
+            flash('Last name must be longer than 2 characters')
             is_valid = False
             
         # check email
         if len(pilot['email']) < 1:
-            flash('email is required')
+            flash('E-mail is required')
             is_valid = False
         elif not EMAIL_REGEX.match(pilot['email']):
             flash('Invalid E-mail address')
@@ -118,7 +119,7 @@ class Pilot:
 
         # check conf_pass valid and == password
         if len(pilot['conf_pass']) < 1:
-            flash('Password confimration required')
+            flash('Password confirmation required')
             is_valid = False
         if pilot['password'] != pilot['conf_pass']:
             flash('Passwords must match')

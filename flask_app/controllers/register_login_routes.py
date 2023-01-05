@@ -1,6 +1,7 @@
-from flask_app.models import pilot, drone
+from flask_app.models import pilot
 from flask_app import app
 from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
 from flask import redirect, session, render_template, request
 
 @app.route('/')
@@ -29,3 +30,8 @@ def submit_registration():
         session['pilot_id'] = pilot.Pilot.create(data)
         return redirect('/dashboard')
     return redirect ('/')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')

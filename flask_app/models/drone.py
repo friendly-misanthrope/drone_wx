@@ -7,6 +7,7 @@ mydb = "drone_wx"
 
 class Drone:
     def __init__(self, data):
+        self.id = data['id']
         self.manufacturer = data['manufacturer']
         self.model = data['model']
         self.wind_resist_kts = data['wind_resist_kts']
