@@ -19,7 +19,7 @@ class Pilot:
         query = '''
         INSERT INTO pilots
         (first_name, last_name, email, password)
-        VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, )
+        VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);
         '''
         return connectToMySQL(mydb).query_db(query)
 
@@ -31,6 +31,19 @@ class Pilot:
         '''
         results = connectToMySQL(mydb).query_db(query)
         return cls(results[0])
+
+    @classmethod
+    def get_all(cls):
+        query = '''
+        SELECT * FROM pilots;
+        '''
+        results = connectToMySQL(mydb).query_db(query)
+        all_pilots = []
+        for result in results:
+            this_pilot = cls(result)
+            all_pilots.append(this_pilot)
+
+        return all_pilots
 
     # Note to self: Overwriting default value for is_certified may cause DB issues later
     @classmethod
