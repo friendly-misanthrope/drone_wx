@@ -26,6 +26,6 @@ def submit_registration():
         # re-assign data dictionary's password field to newly generated hash
         data['password'] = pw_hash
         # Create pilot object, log new pilot in via Session
-        session['user_id'] = pilot.Pilot.create(data)
+        session['pilot_id'] = pilot.Pilot.create(data)
         return redirect('/dashboard')
     return redirect ('/')
