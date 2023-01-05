@@ -4,3 +4,43 @@ from flask import flash
 import re
 
 mydb = "drone_wx"
+
+class Pilot:
+    def __init__(self, data):
+        self.first_name = data['first_name']
+        self.last_name = data['last_name']
+        self.email = data['email']
+        self.password = data['password']
+        self.is_certified = False
+        self.drones = []
+
+    @classmethod
+    def create(cls, data):
+        query = '''
+        INSERT INTO pilots
+        (first_name, last_name, email, password)
+        VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, )
+        '''
+        return connectToMySQL(mydb).query_db(query)
+
+    @classmethod
+    def get_one(cls, data):
+        query = '''
+        SELECT * FROM pilots
+        WHERE id = %(id)s
+        '''
+        results = connectToMySQL(mydb).query_db(query)
+        return cls(results[0])
+
+    # Note to self: Overwriting default value for is_certified may cause DB issues later
+    @classmethod
+    def edit(cls, data):
+        query = '''
+        UPDATE pilots
+        SET first_name = %(first_name)s,
+        last_name = %(last_name)s,
+        email = %(email)s,
+        is_certified = %(is_certified)s
+        WHERE id = %(id)s
+        '''
+        return connectToMySQL(mydb).query_db(query)
