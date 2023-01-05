@@ -18,6 +18,14 @@ def submit_registration():
         "password": request.form['password'],
         "conf_pass": request.form['conf_pass']
     }
-        
-    # Don't forget to change to dashboard when dashboard page is ready
-    return redirect('/')
+    
+    # Validate user registration input
+    if pilot.Pilot.validate_create_pilot(data):
+        # Hash password
+        pw_hash = bcrypt.generate_password_hash(data['password'])
+        # re-assign data dictionary's password field to newly generated hash
+        data['password'] = pw_hash
+        # Create pilot object, log new pilot in via Session
+        session['user_id'] = pilot.Pilot.create(data)
+        return redirect('/dashboard')
+    return redirect ('/')
