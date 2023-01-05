@@ -18,8 +18,6 @@ def submit_registration():
         "password": request.form['password'],
         "conf_pass": request.form['conf_pass']
     }
-
-    print(data)
         
     # Don't forget to change to dashboard when dashboard page is ready
     return redirect('/')
