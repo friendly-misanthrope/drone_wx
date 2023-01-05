@@ -75,3 +75,63 @@ class Pilot:
     @classmethod
     def get_pilot_with_drones(cls, data):
         pass
+
+
+    # ----- VALIDATIONS -----
+    @classmethod
+    def validate_create_pilot(cls, pilot):
+
+        #initialize is_valid to True
+        is_valid = True
+
+        # check first name
+        if len(pilot['first_name']) < 1:
+            flash('First name is required')
+            is_valid = False
+        elif len(pilot['first_name']) < 3:
+            flash('First name must be longer than 2 characters')
+            is_valid = False
+
+        # check last name
+        if len(pilot['last_name']) < 1:
+            flash('last name is required')
+            is_valid = False
+        elif len(pilot['last_name']) < 3:
+            flash('last name must be longer than 2 characters')
+            is_valid = False
+            
+        # check email
+        if len(pilot['email']) < 1:
+            flash('email is required')
+            is_valid = False
+        elif not EMAIL_REGEX.match(pilot['email']):
+            flash('Invalid E-mail address')
+            is_valid = False
+
+        # check password
+        if len(pilot['password']) < 1:
+            flash('Password is required')
+            is_valid = False
+        elif len(pilot['password']) < 9:
+            flash('Password must be longer than 8 characters')
+            is_valid = False
+
+        # check conf_pass valid and == password
+        if len(pilot['conf_pass']) < 1:
+            flash('Password confimration required')
+            is_valid = False
+        if pilot['password'] != pilot['conf_pass']:
+            flash('Passwords must match')
+            is_valid = False
+        
+        # make sure pilot doesn't already exist
+        all_pilots = cls.get_all()
+        for this_pilot in all_pilots:
+            if this_pilot.email == pilot['email']:
+                flash('User already exists!')
+                is_valid = False
+        
+        print(f'Is valid: {is_valid}')
+        return is_valid
+
+        
