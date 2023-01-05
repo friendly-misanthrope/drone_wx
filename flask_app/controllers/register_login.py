@@ -5,7 +5,9 @@ from flask import redirect, session, render_template, request
 
 @app.route('/')
 def landing_page():
-    return render_template('landing_page.html')
+    if 'pilot_id' not in session:
+        return render_template('landing_page.html')
+    return render_template('dashboard.html')
 
 @app.route('/signup', methods=['POST'])
 def submit_registration():
@@ -18,9 +20,6 @@ def submit_registration():
     }
 
     print(data)
-    
-    if 'pilot_id' not in session:
-        pass
         
     # Don't forget to change to dashboard when dashboard page is ready
     return redirect('/')

@@ -27,7 +27,7 @@ class Pilot:
     def get_one(cls, data):
         query = '''
         SELECT * FROM pilots
-        WHERE id = %(id)s
+        WHERE id = %(id)s;
         '''
         results = connectToMySQL(mydb).query_db(query)
         return cls(results[0])
@@ -54,6 +54,6 @@ class Pilot:
         last_name = %(last_name)s,
         email = %(email)s,
         is_certified = %(is_certified)s
-        WHERE id = %(id)s
+        WHERE id = %(id)s;
         '''
         return connectToMySQL(mydb).query_db(query)
