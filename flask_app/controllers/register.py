@@ -15,7 +15,7 @@ def submit_registration():
         "password": request.form['password'],
         "conf_pass": request.form['conf_pass']
     }
-    if 'user_id' not in session:
+    if 'pilot_id' not in session:
         pass
         
     # Don't forget to change to dashboard when dashboard page is ready
