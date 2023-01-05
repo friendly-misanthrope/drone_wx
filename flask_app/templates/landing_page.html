@@ -24,6 +24,15 @@
 
                 <form action="/signup" method="POST">
                     <h2>Sign Up for Free</h2>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages: %}
+                            <ul>
+                                {% for message in messages: %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
                     <div class="label-input-group">
                         <label for="first_name" id="first_name">First Name: <span class="req">*</span></label>
                         <input type="text" id="first_name" name="first_name">

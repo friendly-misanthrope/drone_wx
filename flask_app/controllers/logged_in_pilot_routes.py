@@ -6,6 +6,7 @@ from flask import redirect, session, render_template, request
 @app.route('/dashboard')
 def display_dashboard():
     if 'pilot_id' in session:
-        return render_template('dashboard.html')
+        return render_template('dashboard.html',
+        current_pilot = pilot.Pilot.get_by_id(session['pilot_id']))
     return redirect('/')
 
