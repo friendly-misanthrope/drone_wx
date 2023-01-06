@@ -13,10 +13,10 @@ class Pilot:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.is_certified = False
-        self.drones = []
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.is_certified = False
+        self.drones = []
 
     @classmethod
     def create(cls, data):
@@ -75,10 +75,17 @@ class Pilot:
 
     @classmethod
     def get_pilot_with_drones(cls, data):
+        query = '''
+        SELECT * FROM pilots
+        JOIN drones.pilot_id ON pilots.id
+        WHERE pilots.id = %(id)s;
+        '''
+        results = connectToMySQL(mydb).query_db(query, data)
+
         pass
 
 
-    # ----- VALIDATIONS -----
+    # ----- VALIDATIONS ----- #
     @classmethod
     def validate_create_pilot(cls, pilot):
 
@@ -131,8 +138,7 @@ class Pilot:
             if this_pilot.email == pilot['email']:
                 flash('User already exists!')
                 is_valid = False
-        
-        print(f'Is valid: {is_valid}')
+
         return is_valid
 
         

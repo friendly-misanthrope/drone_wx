@@ -26,12 +26,11 @@ def submit_registration():
         pw_hash = bcrypt.generate_password_hash(data['password'])
         # re-assign data dictionary's password field to newly generated hash
         data['password'] = pw_hash
-        # Create pilot object, log new pilot in via Session
+        # Create pilot object, store in DB, log new pilot in via Session
         session['pilot_id'] = pilot.Pilot.create(data)
         return redirect('/dashboard')
     return redirect ('/')
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect('/')
+@app.route('/pilot_login')
+def show_login_page():
+    return render_template('login.html')
